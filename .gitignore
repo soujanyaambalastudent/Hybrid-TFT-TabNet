@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+checkpoints/
+*.npz
+ptbxl_cache/
+ptbxl_meta/

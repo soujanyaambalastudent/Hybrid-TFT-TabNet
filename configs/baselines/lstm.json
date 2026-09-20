@@ -1,0 +1,10 @@
+{
+  "model": "lstm",
+  "architecture": { "n_leads": 12, "hidden_dim": 128, "num_layers": 2, "dropout": 0.3 },
+  "training": { "optimizer": "adam", "lr": 1e-3, "weight_decay": 1e-4, "grad_clip_norm": 1.0,
+                "lr_schedule": "cosine_annealing_with_warmup", "warmup_epochs": 5,
+                "max_epochs": 50, "early_stopping_patience": 10, "batch_size": 256 },
+  "seed": 42,
+  "reference_params_million": 6.4,
+  "notes": "Table 8/9 baseline. Unidirectional, matches 'LSTM' row (distinct from Bi-LSTM+Att below)."
+}

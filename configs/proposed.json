@@ -1,0 +1,37 @@
+{
+  "model": "hybrid_tft_tabnet",
+  "architecture": {
+    "ecg_branch": {
+      "n_leads": 12,
+      "seq_len": 5000,
+      "embed_dim": 64,
+      "lstm_layers": 2,
+      "attn_heads": 8,
+      "dropout": 0.1,
+      "attn_pool_size": 25
+    },
+    "clinical_branch": {
+      "input_dim": 25,
+      "embed_dim": 64,
+      "n_steps": 5,
+      "n_shared": 2
+    },
+    "fusion_hidden_dim": 64,
+    "fusion_dropout": 0.3
+  },
+  "training": {
+    "optimizer": "adam",
+    "lr": 1e-3,
+    "weight_decay": 1e-4,
+    "grad_clip_norm": 1.0,
+    "lr_schedule": "cosine_annealing_with_warmup",
+    "warmup_epochs": 5,
+    "max_epochs": 50,
+    "early_stopping_patience": 10,
+    "early_stopping_metric": "val_auc_roc",
+    "batch_size": 256,
+    "label_smoothing_eps": 0.05
+  },
+  "seed": 42,
+  "notes": "Matches Table 2 (architecture) and Section 6.2 (training config). attn_pool_size=25 downsamples the LSTM output (T=5000->200) before self-attention -- required for tractability at batch_size=256 (full-resolution attention would need ~205GB for the attention-weight tensor alone); see models/tft_branch.py's TFTBranch docstring."
+}

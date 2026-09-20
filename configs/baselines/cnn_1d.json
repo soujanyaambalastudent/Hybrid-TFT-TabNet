@@ -1,0 +1,10 @@
+{
+  "model": "cnn_1d",
+  "architecture": { "n_leads": 12, "n_filters": [32, 64, 128], "kernel_size": 7, "dropout": 0.3 },
+  "training": { "optimizer": "adam", "lr": 1e-3, "weight_decay": 1e-4, "grad_clip_norm": 1.0,
+                "lr_schedule": "cosine_annealing_with_warmup", "warmup_epochs": 5,
+                "max_epochs": 50, "early_stopping_patience": 10, "batch_size": 256 },
+  "seed": 42,
+  "reference_params_million": 3.2,
+  "notes": "Table 8/9 baseline. Params count is architecture-derived reference only, not a claim -- verify with torchsummary after instantiating."
+}

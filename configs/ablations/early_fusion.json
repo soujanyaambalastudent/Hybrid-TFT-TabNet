@@ -1,0 +1,28 @@
+{
+  "model": "early_fusion",
+  "architecture": {
+    "n_leads": 12,
+    "seq_len": 5000,
+    "clinical_dim": 25,
+    "embed_dim": 64,
+    "lstm_layers": 2,
+    "attn_heads": 8,
+    "dropout": 0.3,
+    "attn_pool_size": 25
+  },
+  "training": {
+    "optimizer": "adam",
+    "lr": 1e-3,
+    "weight_decay": 1e-4,
+    "grad_clip_norm": 1.0,
+    "lr_schedule": "cosine_annealing_with_warmup",
+    "warmup_epochs": 5,
+    "max_epochs": 50,
+    "early_stopping_patience": 10,
+    "early_stopping_metric": "val_auc_roc",
+    "batch_size": 256,
+    "label_smoothing_eps": 0.0
+  },
+  "seed": 42,
+  "notes": "Table 6, ablation A3: raw concatenation of ECG and clinical features before encoding (models/ablation_fusion.py:EarlyFusionModel)."
+}
